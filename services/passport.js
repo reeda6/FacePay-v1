@@ -19,7 +19,8 @@ passport.deserializeUser((id, done)=>{
 passport.use(new GoogleStrategy({
   clientID:keys.googleClientID,
   clientSecret:keys.googleClientSecret,
-  callbackURL:'/auth/google/callback'//route user sent to once granted permission
+  callbackURL:'/auth/google/callback',//route user sent to once granted permission
+  proxy:true
 },(accessToken, refreshToken, profile, done)=>{
   User.findOne({googleId:profile.id})//checks if can find one entry
   //however it is a query and returns a promise
